@@ -3,9 +3,9 @@ import { StyleSheet, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 import Toast from 'react-native-toast-message'
 
-export default function FormPessoa({ navigation, route }) {
+export default function FormPessoas({ navigation, route }) {
 
-    const { acao, pessoa: pessoaAntiga } = route.params
+    const { acao, pessoa: pessoaOld } = route.params
 
     const [nome, setNome] = useState('')
     const [matricula, setmatricula] = useState('')
@@ -17,13 +17,13 @@ export default function FormPessoa({ navigation, route }) {
 
     useEffect(() => {
 
-        console.log('pessoa -> ', pessoaAntiga)
+        console.log('pessoa -> ', pessoaOld)
 
-        if (pessoaAntiga) {
-            setNome(pessoaAntiga.nome)
-            setmatricula(pessoaAntiga.matricula)
-            setturno(pessoaAntiga.turno)
-            setcurso(pessoaAntiga.curso)
+        if (pessoaOld) {
+            setNome(pessoaOld.nome)
+            setmatricula(pessoaOld.matricula)
+            setturno(pessoaOld.turno)
+            setcurso(pessoaOld.curso)
         }
 
     }, [])
@@ -36,28 +36,28 @@ export default function FormPessoa({ navigation, route }) {
         } else {
             setShowMensagemErro(false)
 
-            const novaPessoa = {
+            const newPessoa = {
                 nome: nome,
                 matricula: matricula,
                 turno: turno,
                 curso: curso
             }
 
-            const objetoEmString = JSON.stringify(novaPessoa)
-            console.log("🚀 ~ file: FormPessoa.js:47 ~ salvar ~ objetoEmString:", objetoEmString)
+            const objetoEmString = JSON.stringify(newPessoa)
+            console.log("🚀 ~ file: FormPessoas.js:47 ~ salvar ~ objetoEmString:", objetoEmString)
 
             console.log(typeof (objetoEmString))
 
             const objeto = JSON.parse(objetoEmString)
-            console.log("🚀 ~ file: FormPessoa.js:52 ~ salvar ~ objeto:", objeto)
+            console.log("🚀 ~ file: FormPessoas.js:52 ~ salvar ~ objeto:", objeto)
 
             console.log(typeof (objeto))
 
 
-            if (pessoaAntiga) {
-                acao(pessoaAntiga, novaPessoa)
+            if (pessoaOld) {
+                acao(pessoaOld, newPessoa)
             } else {
-                acao(novaPessoa)
+                acao(newPessoa)
             }
 
 
@@ -76,7 +76,7 @@ export default function FormPessoa({ navigation, route }) {
     return (
         <View style={styles.container}>
 
-            <Text variant='titleLarge' style={styles.title} >{pessoaAntiga ? 'Editar Pessoa' : 'Adicionar Pessoa'}</Text>
+            <Text variant='titleLarge' style={styles.title} >{pessoaOld ? 'Editar Pessoa' : 'Adicionar Pessoa'}</Text>
 
             <View style={styles.inputContainer}>
                 <TextInput

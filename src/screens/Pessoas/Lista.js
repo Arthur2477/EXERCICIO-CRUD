@@ -4,7 +4,7 @@ import { Button, Card, Dialog, FAB, MD3Colors, Portal, Text } from 'react-native
 import Toast from 'react-native-toast-message'
 
 
-export default function ListaPessoas({ navigation, route }) {
+export default function Lista({ navigation, route }) {
 
   const [pessoas, setPessoas] = useState([
     {
@@ -28,17 +28,17 @@ export default function ListaPessoas({ navigation, route }) {
   const hideModal = () => setShowModalExcluirUsuario(false);
 
 
-  function adicionarPessoa(pessoa) {
-    let novaListaPessoas = pessoas
-    novaListaPessoas.push(pessoa)
-    setPessoas(novaListaPessoas)
+  function addPessoa(pessoa) {
+    let newListPessoas = pessoas
+    newListPessoas.push(pessoa)
+    setPessoas(newListPessoas)
   }
 
-  function editarPessoa(pessoaAntiga, novosDados) {
+  function editPessoa(pessoaAntiga, novosDados) {
     console.log('PESSOA ANTIGA -> ', pessoaAntiga)
     console.log('DADOS NOVOS -> ', novosDados)
 
-    const novaListaPessoas = pessoas.map(pessoa => {
+    const newListPessoas = pessoas.map(pessoa => {
       if (pessoa == pessoaAntiga) {
         return novosDados
       } else {
@@ -46,11 +46,11 @@ export default function ListaPessoas({ navigation, route }) {
       }
     })
 
-    setPessoas(novaListaPessoas)
+    setPessoas(newListPessoas)
 
   }
 
-  function excluirPessoa(pessoa) {
+  function exPessoa(pessoa) {
     const novaListaPessoa = pessoas.filter(p => p !== pessoa)
     setPessoas(novaListaPessoa)
     Toast.show({
@@ -60,7 +60,7 @@ export default function ListaPessoas({ navigation, route }) {
   }
 
   function handleExluirPessoa() {
-    excluirPessoa(pessoaASerExcluida)
+    exPessoa(pessoaASerExcluida)
     setPessoaASerExcluida(null)
     hideModal()
   }
@@ -93,7 +93,7 @@ export default function ListaPessoas({ navigation, route }) {
 
             </Card.Content>
             <Card.Actions>
-              <Button onPress={() => navigation.push('FormPessoa', { acao: editarPessoa, pessoa: item })}>
+              <Button onPress={() => navigation.push('FormPessoas', { acao: editPessoa, pessoa: item })}>
                 Editar
               </Button>
               <Button onPress={() => {
@@ -111,7 +111,7 @@ export default function ListaPessoas({ navigation, route }) {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => navigation.push('FormPessoa', { acao: adicionarPessoa })}
+        onPress={() => navigation.push('FormPessoas', { acao: addPessoa })}
       />
 
 

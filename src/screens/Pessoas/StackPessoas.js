@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import FormPessoa from './FormPessoa'
-import ListaPessoas from './ListaPessoas'
+import Lista from './Lista'
+import FormPessoas from './FormPessoas'
 
 const Stack = createStackNavigator()
 
@@ -9,12 +9,12 @@ export default function StackPessoas() {
 
         <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName='ListaPessoas'
+            initialRouteName='Lista'
         >
 
-            <Stack.Screen name='ListaPessoas' component={ListaPessoas} />
+            <Stack.Screen name='Lista' component={Lista} />
 
-            <Stack.Screen name='FormPessoa' component={FormPessoa} />
+            <Stack.Screen name='FormPessoas' component={FormPessoas} />
 
         </Stack.Navigator>
 
